@@ -1,5 +1,5 @@
-from flask import Flask
-from flask import request
+from flask import Flask, request, redirect
+
 from twilio import twiml
 
 from textblob import TextBlob
@@ -7,28 +7,55 @@ from textblob import TextBlob
 app = Flask(__name__)
 
 
+callers = {
+		"+15307509848": "Aakshi",
+		"+15303413085": "Sugeerth" }
+
+
+
+
+
+# @app.route("/", methods=['GET','POST'])
+# def sms():
+#     response = twiml.Response()
+
+#     body = request.form['body']
+
+#     blob = TextBlob(body)
+
+#     # response.message("Hey this is Fake Cortana lol, you sent me words")
+#     # app.logger.info("Received: '{}'\nSent: '{}'".format(body,response.verbs[0].verbs[0].body))
+
+
+#     with response.message("This is where you live Creepy hahah"+str(len("asdas"))) as m: 
+#         m.media("http://photonet.hotpads.com/search/listingPhoto/EquityResidential/3089/0001_2146702751_medium.jpg")
+
+#     return str(response)
+
+
 @app.route("/", methods=['GET','POST'])
-def sms():
-    response = twiml.Response()
+def hello_monkey():
+    """Respond to incoming calls with a simple text message."""
+    resp = twiml.Response()
 
-    body = request.form['body']
-    blob = TextBlob(body)
+    fromNumber = request.values.get('From',None)
+    if fromNumber in callers:
+		message = callers[fromNumber] + "OyeKaisa Hain bhe"
+	else: 
+		message = "Monkey!!!"
 
-    response.message("Hey this is Fake Cortana lol, you sent me {} words".format(len(blob.words)))
+    # body = request.form['']
+    # print body
 
-    # with response.message("This is where you live Creepy hahah") as m: 
-    #     m.media("http://photonet.hotpads.com/search/listingPhoto/EquityResidential/3089/0001_2146702751_medium.jpg")
-    return str(response)
+    # blob = TextBlob(body)
 
+    with resp.message(message+"This is where you live Creepy hahah"+str(len("asdas"))) as m: 
+        m.media("http://photonet.hotpads.com/search/listingPhoto/EquityResidential/3089/0001_2146702751_medium.jpg")
 
-# @app.route("/", methods=['GET', 'POST'])
-# def hello_monkey():
-#     """Respond to incoming calls with a simple text message."""
- 
-#     resp = twilio.twiml.Response()
-#     with resp.message("Hello, Mobile Monkey") as m:
-#         m.media("https://demo.twilio.com/owl.png")
-#     return str(resp)
+    app.logger.info("Received: \nSent: '{}'".format(
+                    resp.verbs[0].verbs[0].body))
+
+    return str(resp)
  
 
 # @app.route("/", methods=['GET','POST'])
