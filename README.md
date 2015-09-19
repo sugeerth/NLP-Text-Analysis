@@ -1,4 +1,4 @@
-Music on Web 
+Podolski
 ======
 
 A personal assistant for students. Planning: Integrate internet of things on the bases of chat. 
