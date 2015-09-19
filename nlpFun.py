@@ -1,26 +1,43 @@
 from flask import Flask
-
+from flask import request
 from twilio import twiml
 
-from textblob import TextBlob 
-
+from textblob import TextBlob
 
 app = Flask(__name__)
 
 
-@app.route('/sms', methods=['POST'])
+@app.route("/", methods=['GET','POST'])
 def sms():
     response = twiml.Response()
-    body = request.form['Body']
 
+    body = request.form['body']
     blob = TextBlob(body)
 
-    response.message("Hey guys this message has {} words.".format(len(blob.words)))
+    response.message("Hey this is Fake Cortana lol, you sent me {} words".format(len(blob.words)))
 
-    app.logger.info("Received: '{}'\nSent: '{}'".format(body,response.verbs[0].verbs[0].body))
-
+    # with response.message("This is where you live Creepy hahah") as m: 
+    #     m.media("http://photonet.hotpads.com/search/listingPhoto/EquityResidential/3089/0001_2146702751_medium.jpg")
     return str(response)
 
+
+# @app.route("/", methods=['GET', 'POST'])
+# def hello_monkey():
+#     """Respond to incoming calls with a simple text message."""
+ 
+#     resp = twilio.twiml.Response()
+#     with resp.message("Hello, Mobile Monkey") as m:
+#         m.media("https://demo.twilio.com/owl.png")
+#     return str(resp)
+ 
+
+# @app.route("/", methods=['GET','POST'])
+# def hello_monkey():
+#     """Respond to incoming calls with a simple text message."""
+ 
+#     resp = twiml.Response()
+#     resp.message("Hello, Mobile Monkey")
+#     return str(resp)
 
 if __name__ == '__main__':
     app.debug = True
