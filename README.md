@@ -5,7 +5,7 @@
 
 [![ScreenShot](http://3.bp.blogspot.com/-qcRsBolJaWA/UF7LEWimvwI/AAAAAAAAAI0/sdCvjzqawbo/s1600/mabi87.png)]()
 
-A personal assistant for students. Planning: Integrate internet of things on the bases of chat. 
+A personal assistant for students.
 
 The features include: 
 
