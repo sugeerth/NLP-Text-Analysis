@@ -18,7 +18,6 @@ app.config['SESSION_TYPE'] = 'memcached'
 app.config['SECRET_KEY'] = 'super secret key'
 
 callers = {
-        "+15307509848": "Aakshi",
         "+15303413085": "Sugeerth" 
         }
 
