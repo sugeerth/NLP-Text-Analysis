@@ -10,7 +10,11 @@ A personal assistant for students.
 The features include: 
 
 1) Specialized sentiment analysis for chat texts 
+
+
 2) Personalized assistant to compare foods around the area  
+
+
 3) Uses location to determine foodplaces around Berkeley
 
 ======
